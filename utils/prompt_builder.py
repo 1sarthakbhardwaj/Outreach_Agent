@@ -44,21 +44,26 @@ def build_prompt(
     specializations = "\n".join([f"- {spec}" for spec in config.get('specializations', [])])
     value_props = "\n".join([f"- {vp}" for vp in config.get('value_propositions', [])])
     
+    # Build prospect info section dynamically based on available fields
+    prospect_lines = [f"- Name: {person_name}"]
+    if company_name:
+        prospect_lines.append(f"- Company Website: {company_name}")
+    if linkedin_url:
+        prospect_lines.append(f"- LinkedIn: {linkedin_url}")
+    if x_profile_url:
+        prospect_lines.append(f"- X (Twitter): {x_profile_url}")
+    prospect_info = "\n".join(prospect_lines)
+
     prompt = f"""You are an expert B2B outreach specialist for Labellerr, a leading AI-powered data annotation platform.
 
 PROSPECT INFORMATION:
-- Name: {person_name}
-- Company: {company_name}
-- LinkedIn: {linkedin_url}
-- X (Twitter): {x_profile_url}
+{prospect_info}
 
 YOUR TASK:
-Using Google Search, research {person_name}'s recent activities on LinkedIn and X/Twitter. Look for any discussions, posts, or indicators related to:
-- Data annotation challenges or needs
-- Machine learning model training requirements
-- Model fine-tuning projects
-- AI/ML infrastructure or pipeline discussions
-- Data quality or labeling pain points
+Using Google Search, research {person_name} and their company. Gather context about:
+- What industry they operate in and current trends/challenges in that industry
+- What their company does, its products, and how it uses AI/ML/data
+- Their professional background, role, and any public posts or activity on LinkedIn or X/Twitter
 
 LABELLERR OVERVIEW:
 {config.get('overview', '')}
@@ -75,20 +80,35 @@ VALUE PROPOSITIONS:
 WEBSITE: {config.get('contact', {}).get('website', 'https://labellerr.com')}
 
 INSTRUCTIONS:
-Generate 3 DISTINCT email variations (each with a different approach/angle) that:
+Generate 3 DISTINCT emails, each with a DIFFERENT angle as described below:
 
-1. Start with a brief, personalized opener referencing their SPECIFIC recent activity or post you found
-2. Acknowledge a potential challenge or interest area related to data annotation/ML training
-3. Introduce Labellerr as a solution, highlighting 2-3 relevant capabilities
-4. Include a clear, low-pressure call-to-action
+**EMAIL 1 - INDUSTRY ANGLE:**
+- Focus on the industry/domain {person_name} works in
+- Reference a real trend, challenge, or development in their industry related to AI/ML and data
+- Connect how Labellerr helps companies in that specific industry
+- Keep it broad and insightful — show you understand their space
 
-REQUIREMENTS:
+**EMAIL 2 - COMPANY ANGLE:**
+- Focus specifically on {person_name}'s company
+- Reference what the company does, its products, or its public AI/ML initiatives
+- Identify a specific way Labellerr could help their company with data annotation needs
+- Show you've done homework on their company
+
+**EMAIL 3 - PERSONAL ANGLE:**
+- Focus on {person_name} personally
+- Reference their role, expertise, or any public posts/activity you found on LinkedIn or X
+- Speak to them as a professional — acknowledge their work or perspective
+- Make it feel like a genuine 1-on-1 conversation
+
+REQUIREMENTS FOR ALL EMAILS:
 - Each email should be 150-200 words maximum
 - Professional but conversational tone
 - Focus on value, not features
 - Avoid being overly salesy or generic
-- Each variation should take a different angle (e.g., technical depth, speed/efficiency, cost savings)
 - Include a compelling subject line for each email
+- Include a clear, low-pressure call-to-action
+- DO NOT include any URLs or links in the email body — no LinkedIn links, no article links, no post links
+- Only reference information in plain text (e.g., "I noticed your company recently expanded into computer vision" NOT "I saw this post: https://...")
 
 FORMAT YOUR RESPONSE EXACTLY AS:
 
@@ -107,7 +127,10 @@ SUBJECT: [subject line]
 
 [email body]
 
-Remember to ground your emails in actual, recent information you find about {person_name} through Google Search."""
+IMPORTANT:
+- Ground all emails in real information found via Google Search — do NOT make up facts
+- DO NOT fabricate or hallucinate any URLs/links — keep the emails clean text only
+- Each email must take a clearly different angle (industry vs company vs personal)"""
 
     return prompt
 

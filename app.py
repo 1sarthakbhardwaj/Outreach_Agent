@@ -269,11 +269,12 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("### About")
     st.markdown("""
-    This tool generates personalized outreach emails by:
-    - Researching prospects via Google Search
-    - Analyzing recent LinkedIn/X activity
-    - Identifying data annotation needs
-    - Crafting 3 unique email variations
+    This tool generates 3 personalized outreach emails:
+    1. **Industry angle** — trends in their domain
+    2. **Company angle** — based on their company
+    3. **Personal angle** — from LinkedIn/X activity
+    
+    All grounded via Google Search research.
     """)
     
     st.markdown("---")
@@ -371,11 +372,18 @@ if 'emails' in st.session_state and st.session_state.emails:
     st.markdown("---")
     st.markdown("## 📬 Generated Email Variations")
     
+    email_angles = {
+        1: ("🌐", "Industry Angle"),
+        2: ("🏢", "Company Angle"),
+        3: ("👤", "Personal Angle"),
+    }
+    
     for i, email in enumerate(st.session_state.emails, 1):
+        icon, angle = email_angles.get(i, ("📧", f"Variation {i}"))
         st.markdown(f"""
         <div class="email-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 style="margin: 0; color: #2c3e50;">📧 Email Variation {i}</h3>
+                <h3 style="margin: 0; color: #2c3e50;">{icon} Email {i} — {angle}</h3>
             </div>
             <div class="email-subject">
                 Subject: {email.get('subject', 'No subject')}
@@ -393,23 +401,7 @@ if 'emails' in st.session_state and st.session_state.emails:
         with st.expander("📋 View Full Email Text (for copying)"):
             st.code(full_email, language=None)
             st.caption("Select all text above (Cmd/Ctrl + A) and copy (Cmd/Ctrl + C)")
-    
-    # Display resources/sources used
-    if 'resources' in st.session_state and st.session_state.resources:
-        st.markdown("---")
-        st.markdown("## 🔍 Research Sources")
-        st.markdown('<p style="color: #666; font-size: 0.95rem;">Sources used by Google Search to generate these emails:</p>', unsafe_allow_html=True)
-        
-        resources_html = '<div class="resources-box">'
-        for i, resource in enumerate(st.session_state.resources, 1):
-            resources_html += f'''
-            <div class="resource-item">
-                <div class="resource-title">{i}. {resource.get("title", "Source")}</div>
-                <div class="resource-url"><a href="{resource["url"]}" target="_blank">{resource["url"]}</a></div>
-            </div>
-            '''
-        resources_html += '</div>'
-        st.markdown(resources_html, unsafe_allow_html=True)
+
     
     # Token usage metrics
     if 'token_usage' in st.session_state:
