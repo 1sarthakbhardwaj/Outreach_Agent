@@ -1,0 +1,46 @@
+labellerr:
+  company_name: "Labellerr"
+  tagline: "The Future of Data Annotation"
+  
+  overview: |
+    Labellerr is an advanced AI-powered data annotation platform that helps enterprises 
+    build high-quality training datasets for their machine learning models. We combine 
+    automation with human expertise to deliver accurate, scalable annotation solutions.
+  
+  key_capabilities:
+    - "AI-assisted annotation with 80% faster turnaround times"
+    - "Multi-modal data support (images, video, text, audio, 3D point clouds)"
+    - "Custom annotation workflows tailored to your use case"
+    - "Quality assurance with consensus-based validation"
+    - "GDPR and SOC2 compliant data handling"
+    - "Integration with popular ML frameworks (TensorFlow, PyTorch, HuggingFace)"
+    - "Active learning pipelines to reduce annotation costs by 60%"
+  
+  specializations:
+    - "Computer Vision: Object detection, segmentation, pose estimation, OCR"
+    - "NLP: Named entity recognition, sentiment analysis, intent classification"
+    - "Medical AI: DICOM annotation, pathology labeling, clinical data extraction"
+    - "Autonomous Systems: LiDAR labeling, sensor fusion, scene understanding"
+    - "Generative AI: RLHF, preference tuning, prompt engineering datasets"
+  
+  value_propositions:
+    - "Reduce annotation time by 80% with AI-powered auto-labeling"
+    - "Scale from 1K to 1M+ annotations seamlessly"
+    - "Enterprise-grade security and compliance"
+    - "Dedicated project managers for white-glove service"
+    - "Flexible pricing: pay-as-you-go or custom enterprise plans"
+  
+  success_stories:
+    - "Helped Fortune 500 automotive company annotate 2M+ autonomous driving frames in 3 months"
+    - "Reduced data prep costs by 65% for a leading healthcare AI startup"
+    - "Enabled a retail AI platform to launch 40% faster with our rapid annotation pipeline"
+  
+  contact:
+    website: "https://labellerr.com"
+    demo_link: "https://labellerr.com/demo"
+    email: "sales@labellerr.com"
+  
+  cta:
+    - "Book a free consultation to discuss your annotation needs"
+    - "Get a custom quote for your project"
+    - "Try our platform with 1000 free annotations"
