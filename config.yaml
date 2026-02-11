@@ -1,46 +1,64 @@
 labellerr:
   company_name: "Labellerr"
-  tagline: "The Future of Data Annotation"
-  
+  tagline: "99% accurate labels, or we don’t charge"
+
   overview: |
-    Labellerr is an advanced AI-powered data annotation platform that helps enterprises 
-    build high-quality training datasets for their machine learning models. We combine 
-    automation with human expertise to deliver accurate, scalable annotation solutions.
-  
+    Labellerr is an AI-powered data annotation platform that helps teams build
+    high-quality training datasets at speed. It combines automated labeling,
+    advanced analytics, and smart QA to support large-scale, production-grade data pipelines.
+
+  headline_metrics:
+    - "High quality labels 99x faster"
+    - "Vision/NLP/LLM models 10x faster"
+    - "Processes million images + thousands hrs of video in weeks"
+    - "Free 14-day pilot + quick setup + no minimum data commitment"
+
+  operating_promises:
+    kickoff_sla: "Project kickoff and workflow setup within 48 hours"
+    quality_sla: "99% accuracy guarantee or no charge (SLA-backed)"
+    cost_model: "Predictable costs with clear pricing and scoped deliverables"
+    workforce: "5000+ resources full-time deployed (annotation + QC)"
+
+  platform_modules:
+    - "Collect: pre-labeled datasets, custom data collection, synthetic data generation"
+    - "Curate: similarity search, filtering, bulk actions, active-learning style prioritization"
+    - "Annotate: image, video, text, audio, PDF, medical formats (DICOM/NIfTI), plus custom workflows"
+    - "Review & QA: reviewer pipelines, inter-annotator agreement, smart quality assurance"
+    - "Analytics: project health, class distribution, annotator velocity, performance tracking"
+
   key_capabilities:
-    - "AI-assisted annotation with 80% faster turnaround times"
-    - "Multi-modal data support (images, video, text, audio, 3D point clouds)"
-    - "Custom annotation workflows tailored to your use case"
-    - "Quality assurance with consensus-based validation"
-    - "GDPR and SOC2 compliant data handling"
-    - "Integration with popular ML frameworks (TensorFlow, PyTorch, HuggingFace)"
-    - "Active learning pipelines to reduce annotation costs by 60%"
-  
+    - "AI-assisted labeling with smart QA and analytics for large-scale pipelines"
+    - "Role-based workflow controls: assign files, move items back to pipeline, create review-only projects"
+    - "Remarks-driven review: filter edge cases where annotators flag doubts"
+    - "Fast quality checks using grid-view visualization for quick sampling"
+    - "Smart Feedback Loop: captures remarks/guidelines and reduces repeat errors across similar data"
+    - "Enterprise options: SSO, SLAs, private cloud or on-prem add-ons"
+    - "Human-in-the-loop services available for managed delivery"
+
   specializations:
-    - "Computer Vision: Object detection, segmentation, pose estimation, OCR"
-    - "NLP: Named entity recognition, sentiment analysis, intent classification"
-    - "Medical AI: DICOM annotation, pathology labeling, clinical data extraction"
-    - "Autonomous Systems: LiDAR labeling, sensor fusion, scene understanding"
-    - "Generative AI: RLHF, preference tuning, prompt engineering datasets"
-  
+    - "Computer Vision: object detection, segmentation, pose/keypoints, tracking, OCR"
+    - "NLP: named entity recognition, sentiment analysis, intent classification"
+    - "Medical AI: DICOM/NIfTI annotation, pathology labeling, clinical data extraction"
+    - "LLM data: instruction tuning, classification, safety and policy labeling"
+
   value_propositions:
-    - "Reduce annotation time by 80% with AI-powered auto-labeling"
-    - "Scale from 1K to 1M+ annotations seamlessly"
-    - "Enterprise-grade security and compliance"
-    - "Dedicated project managers for white-glove service"
-    - "Flexible pricing: pay-as-you-go or custom enterprise plans"
-  
-  success_stories:
-    - "Helped Fortune 500 automotive company annotate 2M+ autonomous driving frames in 3 months"
-    - "Reduced data prep costs by 65% for a leading healthcare AI startup"
-    - "Enabled a retail AI platform to launch 40% faster with our rapid annotation pipeline"
-  
+    - "Kickoff in 48 hours with a production-ready workflow"
+    - "99% accuracy guarantee or you don’t pay"
+    - "Predictable cost and delivery with clear QA gates"
+    - "Scale from small pilots to enterprise workloads without changing tools"
+    - "Built for auditability: clear reviewer feedback loops and measurable quality"
+
+  compliance:
+    - "SOC-2"
+    - "GDPR"
+
   contact:
     website: "https://labellerr.com"
     demo_link: "https://labellerr.com/demo"
-    email: "sales@labellerr.com"
-  
+    email_sales: "sales@labellerr.com"
+    email_support: "support@tensormatics.com"
+
   cta:
-    - "Book a free consultation to discuss your annotation needs"
-    - "Get a custom quote for your project"
-    - "Try our platform with 1000 free annotations"
+    - "Book a demo"
+    - "Start a 14-day pilot"
+    - "Get a scoped quote with SLA-backed accuracy"
