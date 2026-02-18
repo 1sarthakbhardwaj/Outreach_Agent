@@ -24,7 +24,10 @@ def build_prompt(
     linkedin_url: str,
     company_name: str,
     x_profile_url: str,
-    config: Dict[str, Any]
+    config: Dict[str, Any],
+    word_limit: int = 175,
+    past_conversation: str = "",
+    custom_instructions: str = "",
 ) -> str:
     """
     Build a comprehensive prompt for email generation.
@@ -32,19 +35,20 @@ def build_prompt(
     Args:
         person_name: Name of the prospect
         linkedin_url: LinkedIn profile URL
-        company_name: Company name
+        company_name: Company name / website
         x_profile_url: X (Twitter) profile URL
         config: Labellerr configuration dictionary
+        word_limit: Target word count per email
+        past_conversation: Prior chat history with this prospect
+        custom_instructions: User's own style guidelines or example emails
         
     Returns:
         Formatted prompt string
     """
-    # Extract key information from config
     capabilities = "\n".join([f"- {cap}" for cap in config.get('key_capabilities', [])])
     specializations = "\n".join([f"- {spec}" for spec in config.get('specializations', [])])
     value_props = "\n".join([f"- {vp}" for vp in config.get('value_propositions', [])])
     
-    # Build prospect info section dynamically based on available fields
     prospect_lines = [f"- Name: {person_name}"]
     if company_name:
         prospect_lines.append(f"- Company Website: {company_name}")
@@ -53,6 +57,27 @@ def build_prompt(
     if x_profile_url:
         prospect_lines.append(f"- X (Twitter): {x_profile_url}")
     prospect_info = "\n".join(prospect_lines)
+
+    # Build optional sections
+    past_convo_section = ""
+    if past_conversation.strip():
+        past_convo_section = f"""
+PAST CONVERSATION WITH THIS PROSPECT:
+The user has had previous interactions with this prospect. Use this context to make the emails feel like a natural continuation, NOT a cold outreach. Reference past topics where relevant.
+---
+{past_conversation.strip()}
+---
+"""
+
+    custom_instructions_section = ""
+    if custom_instructions.strip():
+        custom_instructions_section = f"""
+USER'S CUSTOM INSTRUCTIONS & STYLE GUIDE:
+The user has provided specific instructions on tone, style, or example emails to follow. These take PRIORITY over the default requirements below. Match this style closely.
+---
+{custom_instructions.strip()}
+---
+"""
 
     prompt = f"""You are an expert B2B outreach specialist for Labellerr, a leading AI-powered data annotation platform.
 
@@ -64,7 +89,7 @@ Using Google Search, research {person_name} and their company. Gather context ab
 - What industry they operate in and current trends/challenges in that industry
 - What their company does, its products, and how it uses AI/ML/data
 - Their professional background, role, and any public posts or activity on LinkedIn or X/Twitter
-
+{past_convo_section}{custom_instructions_section}
 LABELLERR OVERVIEW:
 {config.get('overview', '')}
 
@@ -101,7 +126,7 @@ Generate 3 DISTINCT emails, each with a DIFFERENT angle as described below:
 - Make it feel like a genuine 1-on-1 conversation
 
 REQUIREMENTS FOR ALL EMAILS:
-- Each email should be 150-200 words maximum
+- Each email should be approximately {word_limit} words (target range: {max(50, word_limit - 25)} to {word_limit + 25} words)
 - Professional but conversational tone
 - Focus on value, not features
 - Avoid being overly salesy or generic
@@ -130,7 +155,8 @@ SUBJECT: [subject line]
 IMPORTANT:
 - Ground all emails in real information found via Google Search — do NOT make up facts
 - DO NOT fabricate or hallucinate any URLs/links — keep the emails clean text only
-- Each email must take a clearly different angle (industry vs company vs personal)"""
+- Each email must take a clearly different angle (industry vs company vs personal)
+- Strictly respect the ~{word_limit} word limit per email"""
 
     return prompt
 
